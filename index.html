@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <title>JQuery File Upload</title>
+    </head>
+    <body>
+        <input id="input_photo" type="file">
+        <button 
+            type="button"
+            id="btn_send">
+            Send
+        </button>
+
+        <!--Javascript-->
+        <script src="./assets/jquery/dist/jquery.min.js"></script>
+        <script>
+            $('#btn_send').on('click', function () {
+                var photo = $('#input_photo')[0].files[0];
+                console.log('input_photo: ');
+                console.log($('#input_photo'));
+                
+                var formData = new FormData();
+                formData.append('send', '');
+                formData.append('id', 'erlangparasu');
+                formData.append('name', 'Erlang Parasu');
+                formData.append('photo', photo);
+
+                $.ajax({
+                    url: 'upload.php',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        console.log(data);
+                        //alert(data);
+                    }
+                });
+            });
+        </script>
+        <!--/Javascript-->
+    </body>
+</html>
